@@ -1,12 +1,48 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h2>Página d'inici</h2>
-<p>Informacio General:</p>
+<h2>Página de inicio</h2>
+<p>Información general:</p>
 <ul>
-    <li><strong>Número de treballadors:</strong> {{ num_Treballadors }}</li>
-    <li><strong>Número total de serveis:</strong> {{ num_Serveis }}</li>
-    <li><strong>Número de serveis quotidians:</strong> {{ num_Quotidia }}</li>
-    <li><strong>Número de serveis especials:</strong> {{ num_Especial }}</li>
-  </ul>
+    <li><strong>Número de trabajadores:</strong> {{ num_Treballadors }}</li>
+    <li><strong>Número total de servicios:</strong> {{ num_Serveis }}</li>
+    <li><strong>Número de servicios diarios:</strong> {{ num_Quotidia }}</li>
+    <li><strong>Número de servicios especiales:</strong> {{ num_Especial }}</li>
+</ul>
+
+<canvas id="serviciosChart"></canvas>
+
+<script>
+  // Obtener los datos del servidor
+  const labels = JSON.parse('{{ dias | safe }}');
+  const data = JSON.parse('{{ cantidades | safe }}');
+
+  const datosServicios = {
+      labels: labels,
+      datasets: [{
+          label: 'Cantidad de servicios ultimos 30 dias',
+          data: data,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+      }]
+  };
+
+  // Crear el gráfico
+  const ctx = document.getElementById('serviciosChart').getContext('2d');
+  new Chart(ctx, {
+      type: 'line',
+      data: datosServicios,
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true,
+                  stepSize: 1
+              }
+          }
+      }
+  });
+</script>
+
 {% endblock %}

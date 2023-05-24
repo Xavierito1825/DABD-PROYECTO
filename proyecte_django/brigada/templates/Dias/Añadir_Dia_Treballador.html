@@ -1,0 +1,32 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Formulario</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="dia">Día:</label>
+        <input type="date" class="form-control" id="dia" name="dia" required>
+      </div>
+      <div class="form-group">
+        <label for="treballadors">Trabajadores:</label>
+        <select multiple class="form-control" id="treballadors" name="treballadors[]" required>
+          {% for treballador in treballadors %}
+          <option value="{{ treballador.DNI }}">{{ treballador.Nom }} {{ treballador.Cognom }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tipus_dia">Tipo de día:</label>
+        <select class="form-control" id="tipus_dia" name="tipus_dia" required>
+          <option value="Treballant">Treballant</option>
+          <option value="Personal">Personal</option>
+          <option value="Indisposicio">Indisposicio</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </div>
+  
+{% endblock %}
