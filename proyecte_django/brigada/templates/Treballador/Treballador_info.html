@@ -1,0 +1,53 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>Detalls del Traballador</h1>
+
+    <br>
+    
+    <div class="container overflow-hidden text-center">
+        <div class="row gy-5">
+          <div class="col-6">
+            DNI
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    {% load static %}
+                    <img src="{% static 'person-vcard.svg' %}"> 
+                </span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="{{ trabajador.DNI }}" disabled>
+            </div>
+          </div>
+          <div class="col-6">
+            Nom
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    {% load static %}
+                    <img src="{% static 'file-person.svg' %}"> 
+                </span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="{{ trabajador.Nom }}" disabled>
+            </div>
+          </div>
+          <div class="col-6">
+            Cognom
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    {% load static %}
+                    <img src="{% static 'file-person-fill.svg' %}"> 
+                </span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="{{ trabajador.Cognom }}" disabled>
+            </div>
+          </div>
+          <div class="col-6">
+            Telèfon
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    {% load static %}
+                    <img src="{% static 'telephone.svg' %}"> 
+                </span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="{{ trabajador.Tlf }}" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

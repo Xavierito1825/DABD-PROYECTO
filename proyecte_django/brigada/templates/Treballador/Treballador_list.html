@@ -3,43 +3,30 @@
 {% block content %}
     <h1>Lista de Trabajadores</h1>
 
-    <!--<table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>DNI</th>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Cantidad de Servicios</th>
+                <!-- <th>DNI</th> -->
+                <th>Nom</th>
+                <th>Cognom</th>
+                <!-- <th>Teléfono</th> -->
+                <th>Quantitat de Serveis</th>
+                <th>Info</th>  <!-- Nueva columna para el botón -->
             </tr>
         </thead>
         <tbody>
             {% for trabajador in trabajadores %}
                 <tr>
-                    <td>{{ trabajador.DNI }}</td>
+                    <!-- <td>{{ trabajador.DNI }}</td> -->
                     <td>{{ trabajador.Nom }}</td>
-                    <td>{{ trabajador.Tlf }}</td>
-                    <td>{{ trabajador.cantidad_roles }}</td>
+                    <td>{{ trabajador.Cognom }}</td>
+                    <!-- <td>{{ trabajador.Tlf }}</td> -->
+                    <td class="badge bg-primary rounded-pill">{{ trabajador.cantidad_roles }}</td>
+                    <td>
+                        <a href="{% url 'treballador_info' trabajador.DNI %}" class="btn btn-primary">Detall</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
-    </table>-->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>DNI</th>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Cantidad de Servicios</th>
-            </tr>
-    </thead>
-    <tbody>
-        {% for trabajador in trabajadores %}
-            <tr>
-                <td>{{ trabajador.DNI }}</td>
-                <td>{{ trabajador.Nom }}</td>
-                <td>{{ trabajador.Tlf }}</td>
-                <td class="badge bg-primary rounded-pill">{{ trabajador.cantidad_roles }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+    </table>
 {% endblock %}

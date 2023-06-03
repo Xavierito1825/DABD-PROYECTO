@@ -11,3 +11,16 @@ def lista_trabajadores(request):
     }
 
     return render(request, 'Treballador/Treballador_list.html', context)
+
+from django.shortcuts import render, get_object_or_404
+from .models import Treballador
+
+def treballador_info(request, dni):
+    # Obtener el trabajador utilizando el DNI proporcionado
+    trabajador = get_object_or_404(Treballador, DNI=dni)
+
+    context = {
+        'trabajador': trabajador
+    }
+
+    return render(request, 'Treballador/Treballador_info.html', context)
