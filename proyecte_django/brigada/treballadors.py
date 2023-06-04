@@ -19,8 +19,13 @@ def treballador_info(request, dni):
     # Obtener el trabajador utilizando el DNI proporcionado
     trabajador = get_object_or_404(Treballador, DNI=dni)
 
+    cantidad_especiales = Rol.objects.filter(treballador=trabajador, servei__especial__isnull=False).count()
+    cantidad_quotidians = Rol.objects.filter(treballador=trabajador, servei__quotidia__isnull=False).count()
+
     context = {
-        'trabajador': trabajador
+        'trabajador': trabajador,
+        'especials': cantidad_especiales,
+        'quotidians': cantidad_quotidians
     }
 
     return render(request, 'Treballador/Treballador_info.html', context)
