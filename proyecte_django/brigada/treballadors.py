@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Treballador, Rol
 from django.db.models import Count
+from django.shortcuts import redirect
 
 def lista_trabajadores(request):
     # Obtener todos los trabajadores con la cantidad de roles que tienen
@@ -29,3 +30,16 @@ def treballador_info(request, dni):
     }
 
     return render(request, 'Treballador/Treballador_info.html', context)
+
+
+
+def actualizar_telefono(request, dni):
+    trabajador = get_object_or_404(Treballador, DNI=dni)
+
+    if request.method == 'POST':
+        trabajador.Tlf = request.POST['Tlf']
+        trabajador.save()
+        return redirect('treballador_info', dni=dni)
+
+    return redirect('treballador_info', dni=dni)
+

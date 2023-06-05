@@ -1,0 +1,77 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="modal-body">
+    <div class="container">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="dia_servei">Día:</label>
+          <input type="date" class="form-control" id="busca_dia" name="dia_servei" required>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Mes Informacio</button>
+      </form>
+    </div>
+  </div>
+  
+  
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Quotidians / Especials </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Quotidians</h5>
+          {% for quo in quotidia %}
+          <ul class="list-group">
+            <li class="list-group-item" aria-current="true">{{ quo.Carrer }}, {{ quo.Numero }}, <span class="badge bg-primary rounded-pill text-white">Altura: {{ quo.altura }}</span> </li>
+          </ul>
+          {% endfor %}
+            <br>
+          <h5>Especials</h5>
+          {% for esp in especial %}
+          <ul class="list-group">
+            <li class="list-group-item" aria-current="true">{{ esp.Carrer }}, {{ esp.Numero }}, <span class="badge bg-primary rounded-pill text-white">Profunditat: {{ esp.profunditat }}</span></li>
+          </ul>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Serveis realitzats el Dia: {{ dia_servei }}</h5>
+            <div class="list-group list-group-flush overflow-auto" style="max-height: 300px;">
+              {% for ser in serveis_dia %}
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div>{{ ser.Carrer }}</div>
+                  <span class="badge bg-primary rounded-pill">{{ ser.Numero }}</span>
+                </div>
+                {% for rol in roles %}
+                {% if rol.servei == ser %}
+                <ul class="list-group">
+                  <li class="list-group-item" aria-current="true">{{ rol.treballador.Nom }} <span class="badge bg-primary rounded-pill text-white">{{ rol.tipus_rol }}</span></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
