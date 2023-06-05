@@ -1,6 +1,85 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
+
+<div class="container text-center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myServei">
+      Afergir Servei
+    </button>
+  </div>
+  
+  
+  <script>
+    $('#myModal').on('hide.bs.modal', function () {
+      // Limpiar el formulario al cerrar el modal
+      $(this).find('form')[0].reset();
+    });
+  </script>
+  
+  
+  <div class="modal fade" id="myServei" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Servei info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <h1>Crear Servei</h1>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="dia">Día:</label>
+                <input type="date" class="form-control" id="dia" name="dia" required>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        Carrer
+                    </span>
+                    <input type="text" class="form-control" placeholder="Av. ..." aria-label="Carrer" aria-describedby="basic-addon1" name="Carrer" >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        Numero
+                    </span>
+                    <input type="text" class="form-control" placeholder="123 ..." aria-label="Numero" aria-describedby="basic-addon1" name="Numero" >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        Altura / Profunditat
+                    </span>
+                    <input type="text" class="form-control" placeholder="[0-7]" aria-label="Alt/Prof" aria-describedby="basic-addon1" name="Alt/Prof" >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="tipus_Servei">Tipus de servei:</label>
+                <select class="form-control" id="tipus_Servei" name="tipus_Servei" required>
+                  <option value="Especial">Especial</option>
+                  <option value="Quotidia">Quotidia</option>
+                </select>
+              </div>
+              <button type="submit" name="añadir" class="btn btn-primary">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <br>
+
+
 <div class="modal-body">
     <div class="container">
       <form method="post">
