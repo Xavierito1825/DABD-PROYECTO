@@ -65,21 +65,32 @@
 <div class="modal-body">
   <div class="container">
     <form method="post">
+      {% csrf_token %}
       <div class="form-group">
-        <label for="dia">Día:</label>
-        <input type="date" class="form-control" id="busca_dia" name="dia" required>
+        <label for="dia_info">Día:</label>
+        <input type="date" class="form-control" id="busca_dia" name="dia_info" required>
       </div>
-      <button type="submit" name="dia_info"class="btn btn-primary">Enviar</button>
+      <button type="submit" name="submit" class="btn btn-primary">Enviar</button>
     </form>
   </div>
 </div>
 
-<span class="d-block p-2 bg-primary text-white">Día: {{ dia_dia }}</span>
-<span class="d-block p-2 bg-primary text-white">Tipus de día: {{ tipus_dia }}</span>
-<span class="d-block p-2 bg-primary text-white">Treballadors: </span>
-{% for treballador in treballadors_dia %}
-<span class="d-block p-2 bg-primary text-white">{{ treballador.Nom }} {{ treballador.Cognom }}</span>
-{% endfor %}
+
+
+<div class="grid text-center">
+  <div class="g-col-6"><span class="d-block p-2 bg-primary rounded-pill text-white">Dia:</span></div>
+  <div class="g-col-6">{{ dia_dia }}</div>
+</div>
+<br>
+<div class="grid text-center">
+  <div class="g-col-6"><span class="d-block p-2 bg-primary rounded-pill text-white">Tipus Dia per treballador:</span></div>
+  <div class="g-col-6">
+    {% for tip in tipus_dia %}
+    <div class="text-center">{{ tip.treballador }}  <span class="badge bg-primary rounded-pill text-white">{{ tip.tipus }}</span></div>
+    {% endfor %}
+  </div>
+</div>
+
 
 
 

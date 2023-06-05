@@ -11,7 +11,7 @@ class Treballador(models.Model):
     
     
     def __str__(self):
-        return '{} , {} , {} , {} , {} , {}'.format(self.DNI, self.Nom, self.Cognom, self.Tlf)
+        return '{} , {} , {} , {}'.format(self.DNI, self.Nom, self.Cognom, self.Tlf)
 
 class MesVacances(models.Model):
     JULIOL = 'Juliol'
