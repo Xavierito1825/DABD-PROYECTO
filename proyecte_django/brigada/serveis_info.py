@@ -13,10 +13,7 @@ from django import forms
 
 def lista_serveis(request):
     if request.method == 'POST':
-            print('POST')
-            print(request.POST)
             if 'dia_servei' in request.POST:
-                print('dia_servei')
                 # Obtener el día seleccionado
                 dia = request.POST['dia_servei']
                 if dia:
@@ -43,14 +40,10 @@ def lista_serveis(request):
                 for treballador in treballadors_escollits:
                     tipus_rol_escollit = request.POST.get('tipus_dia_' + treballador)
                     treballador_escollit = Treballador.objects.get(DNI=treballador)
-                    print(tipus_rol_escollit)
-                    print(treballador_escollit)
-                    print(servei_escollit)
                     rol = Rol(treballador=treballador_escollit, servei=servei_escollit, tipus_rol=tipus_rol_escollit)
                     rol.save()                    
 
-            else:     
-                print('servei_form')   
+            else:       
                 carrer = request.POST.get('Carrer')
                 numero = request.POST.get('Numero')
                 dia = request.POST.get('dia')

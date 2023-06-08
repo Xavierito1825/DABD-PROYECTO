@@ -1,7 +1,18 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
+    
     <h1>Lista de Trabajadores</h1>
+    <br>
+    <div class="search-form-container">
+        <form method="get" action="{% url 'treballadors' %}" class="d-flex">
+          <input type="text" class="form-control me-2" name="q" placeholder="Buscar trabajador">
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+    </div>
+      
+    <br>
+      
 
     <table class="table table-striped">
         <thead>
@@ -21,7 +32,7 @@
                     <td>{{ trabajador.Nom }}</td>
                     <td>{{ trabajador.Cognom }}</td>
                     <!-- <td>{{ trabajador.Tlf }}</td> -->
-                    <td class="badge bg-primary rounded-pill">{{ trabajador.cantidad_roles }}</td>
+                    <td class="badge bg-primary rounded-pill text-white">{{ trabajador.cantidad_roles }}</td>
                     <td>
                         <a href="{% url 'treballador_info' trabajador.DNI %}" class="btn btn-primary">Detall</a>
                     </td>

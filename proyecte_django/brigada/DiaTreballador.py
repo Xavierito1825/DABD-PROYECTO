@@ -18,7 +18,7 @@ def asignar_tipus_dia(request):
                 context = {'treballadors': treballadors, 'treballadors_dia': treballadors_dia, 'dia_dia': dia, 'tipus_dia': tipus_dia}
                 return render(request, 'Dias/Añadir_Dia_Treballador.html', context)
 
-        else:
+        elif 'tipus_dia' in request.POST:
             # Obtener los datos del formulario
             dia = request.POST['dia']
             treballadors_envia = request.POST.getlist('treballadors[]')
@@ -38,6 +38,18 @@ def asignar_tipus_dia(request):
                 # Manejar el caso de duplicados
                 # Aquí puedes mostrar un mensaje de error o realizar otra acción apropiada
                 pass
+        else:
+            dia_str = request.POST['dia']
+            fecha_str = dia_str.split(":")[1].strip()
+
+            treballador = request.POST['treballador']
+            valores = treballador.split(",")  # Dividir la cadena por las comas
+            dni = valores[0].strip()
+
+            dia_treball = DiaTreball.objects.get(Dia=fecha_str)
+            treballador = Treballador.objects.get(DNI=dni)
+            elimina_tipus = TipusDia.objects.get(treballador=treballador, dia=fecha_str)
+            elimina_tipus.delete()
         
     # Obtener la lista de trabajadores para mostrar en el formulario
     

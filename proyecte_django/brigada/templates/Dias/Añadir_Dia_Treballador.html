@@ -78,28 +78,44 @@
 <br>
 
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="grid text-center">
-            <div class="g-col-6">
-              <span class="d-block p-2 bg-primary rounded-pill text-white">Tipus Dia {{ dia_dia }}:</span>
-            </div>
-            <div class="g-col-6">
-              {% for tip in tipus_dia %}
-              <ul class="list-group">
-                <li class="list-group-item" aria-current="true">{{ tip.treballador.Nom }}, {{ tip.treballador.Cognom }}   <span class="badge bg-primary rounded-pill text-white">{{ tip.tipus }}</span></li>
-              </ul>
-              
-              {% endfor %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="grid text-center">
+              <div class="g-col-6">
+                <span class="d-block p-2 bg-primary rounded-pill text-white">Tipus Dia {{ dia_dia }}:</span>
+              </div>
+              <div class="g-col-6">
+                <ul class="list-group">
+                  {% for tip in tipus_dia %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+                    <div>
+                      <span class="mr-2">{{ tip.treballador.Nom }}, {{ tip.treballador.Cognom }}</span>
+                      <span class="badge bg-primary rounded-pill text-white">{{ tip.tipus }}</span>
+                    </div>
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="treballador" value="{{ tip.treballador }}">
+                      <input type="hidden" name="dia" value="{{ tip.dia }}">
+                      <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 </div>
+
+
+
 
 
 

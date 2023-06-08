@@ -1,15 +1,29 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h2>Página de inicio</h2>
-<p>Información general:</p>
-<ul>
-    <li><strong>Número de trabajadores:</strong> {{ num_Treballadors }}</li>
-    <li><strong>Número total de servicios:</strong> {{ num_Serveis }}</li>
-    <li><strong>Número de servicios diarios:</strong> {{ num_Quotidia }}</li>
-    <li><strong>Número de servicios especiales:</strong> {{ num_Especial }}</li>
-</ul>
-
+<div class="information-container">
+    <h3>Informació general:</h3>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <strong>Treballadors:</strong>
+        <span class="badge bg-primary">{{ num_Treballadors }}</span>
+      </li>
+      <li class="list-inline-item">
+        <strong>Serveis totals:</strong>
+        <span class="badge bg-primary">{{ num_Serveis }}</span>
+      </li>
+      <li class="list-inline-item">
+        <strong>Serveis Quotidians:</strong>
+        <span class="badge bg-primary">{{ num_Quotidia }}</span>
+      </li>
+      <li class="list-inline-item">
+        <strong>Serveis Especials:</strong>
+        <span class="badge bg-primary">{{ num_Especial }}</span>
+      </li>
+    </ul>
+</div>
+  
+  
 <canvas id="serviciosChart"></canvas>
 
 <script>
@@ -20,7 +34,7 @@
   const datosServicios = {
       labels: labels,
       datasets: [{
-          label: 'Cantidad de servicios ultimos 30 dias',
+          label: 'Quantitat de serveis ultims 30 dias',
           data: data,
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',

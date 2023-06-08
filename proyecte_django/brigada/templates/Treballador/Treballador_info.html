@@ -72,6 +72,60 @@
         </div>
       </div>
 
+    <br>
+
+    <div class="container-sm">
+      <h4>Darrers 5 mesos de vacances:</h4>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearMesVacancesModal">
+        Crear MesVacances
+      </button>
+      
+      <div class="row gx-5">
+        {% for mes_vacaciones in mes_vacances %}
+          <div class="col">
+            <div class="p-3">
+              {{ mes_vacaciones.Any }} {{ mes_vacaciones.Mes }}
+            </div>
+          </div>
+        {% empty %}
+          <div class="col">
+            <div class="p-3">No hi han mesos de vacances.</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="modal fade" id="crearMesVacancesModal" tabindex="-1" aria-labelledby="crearMesVacancesModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="crearMesVacancesModalLabel">Crear MesVacances</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{% url 'afegir_mes' dni=trabajador.DNI %}">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="anyInput" class="form-label">Any</label>
+                <input type="number" class="form-control" id="anyInput" name="any" required>
+              </div>
+              <div class="mb-3">
+                <label for="mesInput" class="form-label">Mes</label>
+                <select class="form-select" id="mesInput" name="mes" required>
+                  <option value="Juliol">Juliol</option>
+                  <option value="Agost">Agost</option>
+                  <option value="Septembre">Septembre</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
       
       
 

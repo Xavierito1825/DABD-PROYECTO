@@ -10,6 +10,7 @@ urlpatterns = [
     path(r'treballadors', treballadors.lista_trabajadores, name="treballadors"),
     path(r'treballadors/<str:dni>/', treballadors.treballador_info, name='treballador_info'),
     path(r'treballador/<str:dni>/actualizar-telefono/', treballadors.actualizar_telefono, name='actualizar_telefono'),
+    path(r'treballador/<str:dni>/afegir-mes/', treballadors.mes_vacances, name='afegir_mes'),
 
     #DiasTreball
     path(r'diatreball', DiaTreballador.asignar_tipus_dia, name="diatreball"),
