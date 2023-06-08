@@ -2,6 +2,9 @@
 
 {% block content %}
 
+
+
+
 <div class="container text-center">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myServei">
       Afergir Servei
@@ -144,6 +147,7 @@
                 </ul>
                 {% endif %}
                 {% endfor %}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ ser.id }}">Añadir Trabajador</button>
               </div>
               {% endfor %}
             </div>
@@ -152,5 +156,51 @@
       </div>
     </div>
   </div>
+  
+  {% for ser in serveis_dia %}
+    <!-- Modal para añadir trabajadores -->
+  <div class="modal fade" id="modal-{{ ser.id }}" tabindex="-1" aria-labelledby="modal-{{ ser.id }}-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-{{ ser.id }}-label">Añadir Trabajador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario para añadir trabajadores -->
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="servei" value="{{ ser.id }}">
+            {% for treballador in treballadors_list %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="{{ treballador.DNI }}" id="defaultCheck{{ treballador.DNI }}" name="trabajador" />
+              <label class="form-check-label" for="defaultCheck{{ treballador.DNI }}">
+                {{ treballador.Nom }} {{ treballador.Cognom }}
+              </label>
+              <div class="form-group">
+                <select class="form-control" id="tipus_dia_{{ treballador.DNI }}" name="tipus_dia_{{ treballador.DNI }}" required>
+                  <option value="Responsable">Responsable</option>
+                  <option value="Asistent">Asistent</option>
+                  <option value="Comunicador">Comunicador</option>
+                </select>
+              </div>
+            </div>
+            
+            {% endfor %}
+
+            <!-- Otros campos del formulario, si los hay -->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+  
   
 {% endblock %}

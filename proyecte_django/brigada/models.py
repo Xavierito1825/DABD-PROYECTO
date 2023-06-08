@@ -103,12 +103,12 @@ class Rol(models.Model):
             )
         ]
 
-    def save(self, *args, **kwargs):
-        # Verificar que un Servei te minim 3 treballadors
-        if self.servei.treballadors.count() >= 3:
-            super(Rol, self).save(*args, **kwargs)
-        else:
-            raise ValueError('El servei ha de tenir al menys 3 treballadors.')
+    # def save(self, *args, **kwargs):
+    #     # Verificar que un Servei te minim 3 treballadors
+    #     if self.servei.treballadors.count() >= 3:
+    #         super(Rol, self).save(*args, **kwargs)
+    #     else:
+    #         raise ValueError('El servei ha de tenir al menys 3 treballadors.')
         
     def __str__(self):
         return 'Servei: {} , Treballador: {}'.format(self.servei, self.treballador)
