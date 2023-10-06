@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 from django.shortcuts import render
 from .models import MesVacances, Treballador, Rol
@@ -28,7 +29,10 @@ def treballador_info(request, dni):
 
     cantidad_especiales = Rol.objects.filter(treballador=trabajador, servei__especial__isnull=False).count()
     cantidad_quotidians = Rol.objects.filter(treballador=trabajador, servei__quotidia__isnull=False).count()
-    ultimos_meses_vacaciones = MesVacances.objects.filter(treballadors=trabajador).order_by('Any', 'Mes')[4:]
+    year_actual = datetime.datetime.now().year
+
+    # Filtrar los últimos meses de vacaciones desde el año actual hasta el final de la lista
+    ultimos_meses_vacaciones = MesVacances.objects.filter(treballadors=trabajador, Any__gte=year_actual).order_by('Any', 'Mes')
 
 
     context = {
